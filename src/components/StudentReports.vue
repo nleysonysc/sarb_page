@@ -10,7 +10,7 @@
       <h3>Previous Letters</h3>
       <ul>
         <li v-for="report in studentReports" :key="report.id">
-          <a :href="report.url">{{report.title}}</a>
+          <a :href="report.url" target="_blank">{{report.title}}</a>
         </li>
       </ul>
     </div>
