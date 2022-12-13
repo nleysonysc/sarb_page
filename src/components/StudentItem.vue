@@ -31,14 +31,15 @@
   <li class="student-item">
     <div class="student-options">
       <span>Name: {{student.first_name}} {{student.last_name}} (Grade {{student.grade}})</span>
-      <span>Guardian Name: {{student.guardian_fname}} {{student.guardian_lname}} (student.guardian_email)</span>
+      <span>DOB: {{student.dob}}</span>
+      <span>Guardian Name: {{student.guardian_fname}} {{student.guardian_lname}} ({{student.guardian_email}})</span>
       <span>Absences: {{student.days_absent}}</span>
       <span>Absent Dates: {{student.absent_dates}}</span>
       <span>Percent Absent: {{student.percent_absent}}%</span>
       <span v-if="student.excused_days_absent">Exused Absences: {{student.grade}}</span>
       <span v-if="student.excused_absent_dates">Exused Absent Dates: {{student.excused_absent_dates}}</span>
       <span v-if="student.tardies">Tardies: {{student.tardies}}</span>
-      <span v-if="student.tardy_dates">Tardy Dates{{student.tardy_dates}}</span>
+      <span v-if="student.tardy_dates">Tardy Dates: {{student.tardy_dates}}</span>
       <button v-for="lvl in maxLvl()" @click="()=>{createLetter(lvl)}">Create Level {{lvl}}</button>
     </div>
     <StudentReports :studentReports="reports" />
