@@ -9,8 +9,9 @@
   <div class="reports">
       <h3>Previous Letters</h3>
       <ul>
-        <li v-for="report in studentReports" :key="report.id">
+        <li v-for="report in studentReports" :key="report.key">
           <a :href="report.url" target="_blank">{{report.title}}</a>
+          <sup v-if="report.sentOn">Sent On: {{report.sentOn}}</sup>
         </li>
       </ul>
     </div>
