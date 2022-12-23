@@ -12,7 +12,7 @@ export const useStudentsStore = defineStore('students', () => {
   }
   
   async function createLetter(student, lvl) {
-    gsq.push(createLetter, ()=>{fetchStudentReportsById(student.id)}, student, lvl)
+    gsq.push('createLetter', ()=>{fetchStudentReportsById(student.id)}, student, lvl)
   }
 
   function setStudentReports(reports, studentId) {
@@ -21,11 +21,11 @@ export const useStudentsStore = defineStore('students', () => {
   }
   
   async function fetchStudentReportsById(studentId) {
-    gsq.push(getLettersById, (reports)=>{fetchStudentReportsById(reports, student.id)}, studentId)
+    gsq.push('getLettersById', (reports)=>{setStudentReports(reports, studentId)}, studentId)
   }
   
   async function fetchStudents() {
-    gsq.push(sarbStudents, populateList)
+    gsq.push('sarbStudents', populateList)
   }
 
   return { students, setStudentReports, fetchStudents, createLetter, fetchStudentReportsById }
