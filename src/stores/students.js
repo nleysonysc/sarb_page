@@ -1,6 +1,8 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
+import gsQueue from '../util/gsQueue'
 
+let gsq = new gsQueue(20)
 
 export const useStudentsStore = defineStore('students', () => {
   const students = ref([])
@@ -10,20 +12,20 @@ export const useStudentsStore = defineStore('students', () => {
   }
   
   async function createLetter(student, lvl) {
-    google.script.run.withSuccessHandler(()=>{fetchStudentReportsById(student.id)}).createLetter(student, lvl);
+    gsq.push(createLetter, ()=>{fetchStudentReportsById(student.id)}, student, lvl)
   }
 
-  function setStudentReports(studentId, reports) {
+  function setStudentReports(reports, studentId) {
     let student = students.value.find(student => student.id == studentId)
     student.reports = reports
   }
   
   async function fetchStudentReportsById(studentId) {
-    google.script.run.withSuccessHandler((res) => {setStudentReports(studentId, res)}).getLettersById(studentId);
+    gsq.push(getLettersById, (reports)=>{fetchStudentReportsById(reports, student.id)}, studentId)
   }
   
   async function fetchStudents() {
-    google.script.run.withSuccessHandler(populateList).sarbStudents();
+    gsq.push(sarbStudents, populateList)
   }
 
   return { students, setStudentReports, fetchStudents, createLetter, fetchStudentReportsById }
