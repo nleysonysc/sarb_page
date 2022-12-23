@@ -4,10 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "vite build && node ./bin/as_build.js",
+    "preview": "vite preview",
+    "deploy": "cd ./as_build && clasp push",
+    "watch": "cd ./as_build && clasp push -w"
   },
   "dependencies": {
+    "@google/clasp": "^2.4.2",
     "pinia": "^2.0.26",
     "vue": "^3.2.45"
   },
