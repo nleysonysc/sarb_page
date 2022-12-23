@@ -31,7 +31,7 @@
       <span v-if="student.excused_absent_dates">Exused Absent Dates: {{student.excused_absent_dates}}</span>
       <span v-if="student.tardies">Tardies: {{student.tardies}}</span>
       <span v-if="student.tardy_dates">Tardy Dates: {{student.tardy_dates}}</span>
-      <button v-for="lvl in maxLvl()" @click="()=>{studentStore.createLetter(student, lvl)}">Create Level {{lvl}} Letter</button>
+      <button v-for="lvl in maxLvl()" @click="(e)=>{studentStore.createLetter(student, lvl)}">Create Level {{lvl}} Letter</button>
     </div>
     <StudentReports :studentReports="student.reports" />
   </li>
