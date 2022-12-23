@@ -17,6 +17,8 @@ export const useStudentsStore = defineStore('students', () => {
 
   function setStudentReports(reports, studentId) {
     let student = students.value.find(student => student.id == studentId)
+    console.log(studentId)
+    console.log(reports)
     student.reports = reports
   }
   
