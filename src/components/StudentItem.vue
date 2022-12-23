@@ -10,7 +10,7 @@
   })
 
   const { student } = toRefs(props)
-  studentStore.fetchStudentReportsById(student.id)
+  studentStore.fetchStudentReportsById(student.value.id)
 
   function maxLvl (){
     return student.value.days_absent < 10 ? Math.floor(student.value.days_absent/3) : 3

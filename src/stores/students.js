@@ -15,15 +15,15 @@ export const useStudentsStore = defineStore('students', () => {
     gsq.push('createLetter', ()=>{fetchStudentReportsById(student.id)}, student, lvl)
   }
 
-  function setStudentReports(reports, studentId) {
-    let student = students.value.find(student => student.id == studentId)
-    console.log(studentId)
-    console.log(reports)
-    student.reports = reports
+  function setStudentReports(reports) {
+    if (reports.length > 0) {
+      let student = students.value.find(student => student.id == reports[0].studentId)
+      student.reports = reports
+    }
   }
   
   async function fetchStudentReportsById(studentId) {
-    gsq.push('getLettersById', (reports)=>{setStudentReports(reports, studentId)}, studentId)
+    gsq.push('getLettersById', setStudentReports, studentId)
   }
   
   async function fetchStudents() {

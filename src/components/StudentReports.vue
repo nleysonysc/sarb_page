@@ -2,7 +2,6 @@
   defineProps({
     studentReports: Array
   })
-  console.log('studentReports')
 
 </script>
 
