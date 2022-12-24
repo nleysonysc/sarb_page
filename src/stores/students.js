@@ -34,5 +34,10 @@ export const useStudentsStore = defineStore('students', () => {
     return students.value.find(student => student.id == id)
   }
 
-  return { students, setStudentReports, fetchStudents, createLetter, fetchStudentReportsById, getStudent }
+  function getStudentReports(id) {
+    let student = students.value.find(student => student.id == id)
+    return student?.reports || []
+  }
+
+  return { students, setStudentReports, fetchStudents, createLetter, fetchStudentReportsById, getStudent, getStudentReports }
 })

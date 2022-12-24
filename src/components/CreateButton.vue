@@ -10,22 +10,31 @@
   const { student, level } = toRefs(props)
 
   const loading = ref(false)
+  const loadingTimeout = {timer: null}
 
   function handleClick(e) {
     studentStore.createLetter(student.value, level.value)
     loading.value = true
+    loadingTimeout.timer = setTimeout(()=> {
+      loading.value = false
+      loadingTimeout.timer = null
+    }, 10000)
   }
 
-  watch(studentStore.students, () => {
-    console.log('updated')
-    loading.value = false
-  })
-
-
+  watch(
+    ()=>studentStore.getStudentReports(student.value.id), 
+    () => {
+      loading.value = false
+      clearTimeout(loadingTimeout.timer)
+      loadingTimeout.timer = null
+    }
+  )
 </script>
 
 <template>
-  <button @click="handleClick" :disabled="loading">Create Level {{level}} Letter</button>
+  <button @click="handleClick" :disabled="loading">
+    {{loading ? 'loading...' : `Create Level ${level} Letter` }}
+  </button>
 </template>
 
 <style scoped>
