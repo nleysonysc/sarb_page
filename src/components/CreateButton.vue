@@ -9,8 +9,13 @@
   })
   const { student, level } = toRefs(props)
 
-  const loading = ref(false)
-  const loadingTimeout = {timer: null}
+  const loading = ref(true)
+  const loadingTimeout = {
+    timer: setTimeout(()=> {
+            loading.value = false
+            loadingTimeout.timer = null
+          }, 5000)
+  }
 
   function handleClick(e) {
     studentStore.createLetter(student.value, level.value)
