@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "vite build && node ./bin/as_build.js",
     "preview": "vite preview",
-    "deploy": "cd ./as_build && clasp push",
+    "deploy": "vite build && node ./bin/as_build.js && cd ./as_build && clasp push",
     "watch": "cd ./as_build && clasp push -w"
   },
   "dependencies": {

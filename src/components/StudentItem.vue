@@ -1,6 +1,7 @@
 <script setup>
   import StudentReports from './StudentReports.vue'
-  import { ref, toRefs, watch } from 'vue'
+  import CreateButton from './CreateButton.vue'
+  import { ref, toRefs } from 'vue'
   import { useStudentsStore } from '../stores/students.js'
 
   const studentStore = useStudentsStore()
@@ -31,7 +32,7 @@
       <span v-if="student.excused_absent_dates">Exused Absent Dates: {{student.excused_absent_dates}}</span>
       <span v-if="student.tardies">Tardies: {{student.tardies}}</span>
       <span v-if="student.tardy_dates">Tardy Dates: {{student.tardy_dates}}</span>
-      <button v-for="lvl in maxLvl()" @click="(e)=>{studentStore.createLetter(student, lvl)}">Create Level {{lvl}} Letter</button>
+      <CreateButton v-for="lvl in maxLvl()" :student="student" :level="lvl"></CreateButton>
     </div>
     <StudentReports :studentReports="student.reports" />
   </li>

@@ -30,5 +30,9 @@ export const useStudentsStore = defineStore('students', () => {
     gsq.push('sarbStudents', populateList)
   }
 
-  return { students, setStudentReports, fetchStudents, createLetter, fetchStudentReportsById }
+  function getStudent(id) {
+    return students.value.find(student => student.id == id)
+  }
+
+  return { students, setStudentReports, fetchStudents, createLetter, fetchStudentReportsById, getStudent }
 })
